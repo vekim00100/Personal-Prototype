@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd1raq85o3oei"]
+
+[ext_resource type="Script" path="res://World/house.gd" id="1_k3bwl"]
+[ext_resource type="PackedScene" uid="uid://cc7pvlbefa08w" path="res://assets/map.fbx" id="1_vhy3r"]
+[ext_resource type="PackedScene" uid="uid://d1abdd6i60pf4" path="res://Player/Player.tscn" id="2_am2qr"]
+
+[node name="house" type="Node3D"]
+script = ExtResource("1_k3bwl")
+
+[node name="Player" parent="." instance=ExtResource("2_am2qr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0447605, 2.07932, 0.134072)
+
+[node name="map" parent="." instance=ExtResource("1_vhy3r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 4.5, 37)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.126711, 4.13955, 0.612703)

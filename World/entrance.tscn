@@ -7,19 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://cc7pvlbefa08w" path="res://assets/map.fbx" id="4_sa1x4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_44e5x"]
-size = Vector3(1.60089, 3.46436, 1)
+size = Vector3(1.60089, 3.46436, 2.8114)
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5xrc"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_7hsy4"]
 panorama = ExtResource("1_hets1")
 
-[sub_resource type="Sky" id="Sky_icoyw"]
+[sub_resource type="Sky" id="Sky_7dgcs"]
 sky_material = SubResource("PanoramaSkyMaterial_7hsy4")
 
 [sub_resource type="Environment" id="Environment_01oh1"]
 background_mode = 2
-sky = SubResource("Sky_icoyw")
+sky = SubResource("Sky_7dgcs")
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
@@ -42,12 +42,14 @@ script = ExtResource("1_pgkn7")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.131345, -2.532, -22.323)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.131345, -2.532, -21.4173)
 shape = SubResource("BoxShape3D_44e5x")
 
 [node name="PressFLabel" type="Label" parent="."]
-offset_right = 151.0
-offset_bottom = 23.0
+offset_left = 89.0
+offset_top = 77.0
+offset_right = 240.0
+offset_bottom = 100.0
 text = "Press [F] to Interact"
 label_settings = SubResource("LabelSettings_e5xrc")
 horizontal_alignment = 1

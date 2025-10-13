@@ -23,6 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00255322, 0.597925, 0.0015
 script = ExtResource("2_bysxj")
 
 [node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.444173)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109614, 0.0814125, -0.509349)
