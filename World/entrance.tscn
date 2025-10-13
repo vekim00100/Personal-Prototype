@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://d2blpygqr4wu1"]
+
+[ext_resource type="Texture2D" uid="uid://brwbuuvca8711" path="res://assets/Textures/sky.jpg" id="1_hets1"]
+[ext_resource type="Texture2D" uid="uid://l1k800lpenhx" path="res://icon.svg" id="2_mfb2i"]
+[ext_resource type="PackedScene" uid="uid://d1abdd6i60pf4" path="res://Player/Player.tscn" id="3_x2882"]
+[ext_resource type="PackedScene" uid="uid://cc7pvlbefa08w" path="res://assets/map.fbx" id="4_sa1x4"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_7hsy4"]
+panorama = ExtResource("1_hets1")
+
+[sub_resource type="Sky" id="Sky_icoyw"]
+sky_material = SubResource("PanoramaSkyMaterial_7hsy4")
+
+[sub_resource type="Environment" id="Environment_01oh1"]
+background_mode = 2
+sky = SubResource("Sky_icoyw")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.116659, 0.130722, 0.15283, 1)
+fog_density = 0.019
+fog_sky_affect = 0.85
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n4xaj"]
+size = Vector3(15, 1, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kkna1"]
+albedo_texture = ExtResource("2_mfb2i")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ynldn"]
+
+[node name="entrance" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_01oh1")
+
+[node name="streetlight2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.1909, 6.481, 16.809)
+light_color = Color(0.815686, 0.670588, 0.0823529, 1)
+light_energy = 16.0
+light_indirect_energy = 4.3
+omni_range = 9.51
+omni_attenuation = 4.92
+
+[node name="streetlight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4086, 6.48144, 16.8087)
+light_color = Color(0.815686, 0.670588, 0.0823529, 1)
+light_energy = 16.0
+light_indirect_energy = 4.3
+omni_range = 9.51
+omni_attenuation = 4.92
+
+[node name="floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.5091, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_n4xaj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 15, 0, -0.848562, 0)
+material_override = SubResource("StandardMaterial3D_kkna1")
+mesh = SubResource("BoxMesh_ynldn")
+
+[node name="Player" parent="." instance=ExtResource("3_x2882")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795008, -3.32389, 0.834505)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.743145, 0.551448, -0.379, 0, 0.566406, 0.824126, 0.669131, -0.612445, 0.420922, 0, 7.07332, 0)
+shadow_enabled = true
+
+[node name="map" parent="." instance=ExtResource("4_sa1x4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1269, 0, 11.7165)

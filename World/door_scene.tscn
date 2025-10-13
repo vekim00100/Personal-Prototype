@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://k4635uvjaxs5"]
+
+[ext_resource type="PackedScene" uid="uid://cl5bxn3xb86wc" path="res://assets/door.tscn" id="1_hjbfd"]
+[ext_resource type="Script" path="res://assets/door.gd" id="2_sd3pm"]
+[ext_resource type="Texture2D" uid="uid://l1k800lpenhx" path="res://icon.svg" id="3_bv6te"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r1bx6"]
+size = Vector3(15, 1, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ledxk"]
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("3_bv6te")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gprtk"]
+
+[node name="door_scene" type="Node3D"]
+
+[node name="door" parent="." instance=ExtResource("1_hjbfd")]
+transform = Transform3D(0.999859, 0, 0, 0, 0.999859, 0, 0, 0, 0.999859, 0, 0.672, 0)
+script = ExtResource("2_sd3pm")
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_r1bx6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 15, 0, -0.848562, 0)
+material_override = SubResource("StandardMaterial3D_ledxk")
+mesh = SubResource("BoxMesh_gprtk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.816237, 2.51237)
+light_energy = 0.3
+shadow_enabled = true
+sky_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00138569, 0.711647, 1.6298)
