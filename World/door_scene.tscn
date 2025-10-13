@@ -35,6 +35,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.816237, 2.51237)
 light_energy = 0.3
 shadow_enabled = true
 sky_mode = 1
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00138569, 0.711647, 1.6298)

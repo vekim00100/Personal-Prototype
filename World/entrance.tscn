@@ -1,9 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2blpygqr4wu1"]
+[gd_scene load_steps=14 format=3 uid="uid://d2blpygqr4wu1"]
 
 [ext_resource type="Texture2D" uid="uid://brwbuuvca8711" path="res://assets/Textures/sky.jpg" id="1_hets1"]
+[ext_resource type="Script" path="res://World/entrance.gd" id="1_pgkn7"]
 [ext_resource type="Texture2D" uid="uid://l1k800lpenhx" path="res://icon.svg" id="2_mfb2i"]
 [ext_resource type="PackedScene" uid="uid://d1abdd6i60pf4" path="res://Player/Player.tscn" id="3_x2882"]
 [ext_resource type="PackedScene" uid="uid://cc7pvlbefa08w" path="res://assets/map.fbx" id="4_sa1x4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_44e5x"]
+size = Vector3(1.60089, 3.46436, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5xrc"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_7hsy4"]
 panorama = ExtResource("1_hets1")
@@ -31,6 +37,21 @@ uv1_scale = Vector3(3, 2, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_ynldn"]
 
 [node name="entrance" type="Node3D"]
+script = ExtResource("1_pgkn7")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.131345, -2.532, -22.323)
+shape = SubResource("BoxShape3D_44e5x")
+
+[node name="PressFLabel" type="Label" parent="."]
+offset_right = 151.0
+offset_bottom = 23.0
+text = "Press [F] to Interact"
+label_settings = SubResource("LabelSettings_e5xrc")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_01oh1")
@@ -66,9 +87,10 @@ mesh = SubResource("BoxMesh_ynldn")
 [node name="Player" parent="." instance=ExtResource("3_x2882")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.795008, -3.32389, 0.834505)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.743145, 0.551448, -0.379, 0, 0.566406, 0.824126, 0.669131, -0.612445, 0.420922, 0, 7.07332, 0)
-shadow_enabled = true
-
 [node name="map" parent="." instance=ExtResource("4_sa1x4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1269, 0, 11.7165)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.743145, 0.551448, -0.379, 0, 0.566406, 0.824126, 0.669131, -0.612445, 0.420922, 0, 7.07332, 0)
+visible = false
+shadow_enabled = true
