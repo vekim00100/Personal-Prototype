@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cc7pvlbefa08w" path="res://assets/map.fbx" id="4_sa1x4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_44e5x"]
-size = Vector3(1.60089, 3.46436, 2.8114)
+size = Vector3(1.60089, 3.46436, 1.99664)
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5xrc"]
 
@@ -42,7 +42,7 @@ script = ExtResource("1_pgkn7")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.131345, -2.532, -21.4173)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.131345, -2.532, -21.8247)
 shape = SubResource("BoxShape3D_44e5x")
 
 [node name="PressFLabel" type="Label" parent="."]

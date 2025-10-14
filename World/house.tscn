@@ -1,17 +1,59 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd1raq85o3oei"]
+[gd_scene load_steps=7 format=3 uid="uid://bd1raq85o3oei"]
 
 [ext_resource type="Script" path="res://World/house.gd" id="1_k3bwl"]
 [ext_resource type="PackedScene" uid="uid://cc7pvlbefa08w" path="res://assets/map.fbx" id="1_vhy3r"]
 [ext_resource type="PackedScene" uid="uid://d1abdd6i60pf4" path="res://Player/Player.tscn" id="2_am2qr"]
+[ext_resource type="Script" path="res://World/camera-switcher.gd" id="4_741mm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7nm2c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oehq6"]
+size = Vector3(56.0809, 0.078125, 34.9693)
 
 [node name="house" type="Node3D"]
 script = ExtResource("1_k3bwl")
 
 [node name="Player" parent="." instance=ExtResource("2_am2qr")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0447605, 2.07932, 0.134072)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0447605, 0.818483, 0.134072)
 
 [node name="map" parent="." instance=ExtResource("1_vhy3r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 4.5, 37)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.126711, 4.13955, 0.612703)
+transform = Transform3D(1, 0, 0, 0, 0.0724027, 0.997375, 0, -0.997375, 0.0724027, -2.66281, 5.0081, -2.47079)
+light_color = Color(0.306953, 0.527465, 0.28839, 1)
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["CamerasToSwitchTo"]]
+transform = Transform3D(-0.926508, 0.176076, -0.332536, 0.0157432, 0.901124, 0.433276, 0.375946, 0.396198, -0.837671, -1.47118, 5.33453, -7.12761)
+
+[node name="Area3D" type="Area3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, 5.96046e-08, 0, 1, -0.11776, 0.0223794, -0.0422668)
+script = ExtResource("4_741mm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D"]
+transform = Transform3D(1, 0, 2.08616e-07, -2.08616e-07, 1, 0, 2.68221e-07, 8.9407e-08, 1, 1.90794, 0.115777, -8.70522)
+shape = SubResource("BoxShape3D_7nm2c")
+
+[node name="Camera3D" type="Camera3D" parent="Camera3D" groups=["CamerasToSwitchTo"]]
+transform = Transform3D(-0.997825, 0.0205776, -0.0626287, -0.0324546, 0.673585, 0.738397, 0.0573801, 0.738823, -0.671452, -3.43009, 0.667516, -1.36174)
+
+[node name="Area3D" type="Area3D" parent="Camera3D/Camera3D"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, 5.96046e-08, 0, 1, -0.11776, 0.0223794, -0.0422668)
+script = ExtResource("4_741mm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Camera3D/Area3D"]
+transform = Transform3D(0.999999, -4.65661e-10, 2.10479e-07, -1.96043e-07, 1, -5.96046e-08, 2.72878e-07, 1.19209e-07, 0.999999, -1.54346, -3.90284, -3.15566)
+shape = SubResource("BoxShape3D_7nm2c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155533, 0.0486863, -14.7726)
+shape = SubResource("BoxShape3D_oehq6")
+
+[connection signal="body_entered" from="Camera3D/Area3D" to="." method="PlayerEntered"]
+[connection signal="body_entered" from="Camera3D/Area3D" to="Camera3D/Area3D" method="PlayerEntered"]
+[connection signal="body_entered" from="Camera3D/Area3D" to="Camera3D/Area3D" method="_on_body_entered"]
+[connection signal="body_entered" from="Camera3D/Camera3D/Area3D" to="." method="PlayerEntered"]
+[connection signal="body_entered" from="Camera3D/Camera3D/Area3D" to="Camera3D/Camera3D/Area3D" method="PlayerEntered"]
+[connection signal="body_entered" from="Camera3D/Camera3D/Area3D" to="Camera3D/Camera3D/Area3D" method="_on_body_entered"]
